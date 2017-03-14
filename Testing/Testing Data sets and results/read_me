@@ -1,0 +1,38 @@
+----------------------------------
+This directory contains data sets that was used in stand-still positioning statistical precision testing (mean and variance of the real position)
+----------------------------------
+beacons used :
+
+1) estimote
+2) MiniBeacon_04864
+3) MiniBeacon_04867
+----------------------------------
+The Data sets :
+
+1) test-x1-1.4-y1-0-x2-1.4-y2-0.9-x3-1.4-y3-0.6
+2) test-x1-2.1-y1--0.6-x2-1.7-y2-2.2-x3--2.5-y3-1.0
+3) test-x1--2.45-y1-1.0-x2--4.31-y2-1.25-x3--2.71-y3--0.75
+---------------
+Note : beacons positions were calculated assuming RPi3 at the origin ( 0, 0)
+---------------
+1) with beacons positions as follows :
+	1) ( 1.4, 0)
+	2) ( 1.4, 0.9)
+	3) ( 1.4, 0.6)
+---------------
+2) with beacons positions as follows :
+	1) ( 2.1,-0.6)
+	2) ( 1.7, 2.2)
+	3) (-2.5, 1.0)
+---------------
+3) with beacons positions as follows :
+	1) (-2.45, 1.0)
+	2) (-4.31, 1.25)
+	3) (-2.71,-0.75)
+----------------------------------
+----------------------------------
+----------------------------------
+To run the test and see the test results :
+
+1) copy the content of the file to the file named "test-accuracy.txt"
+2) use the script "calc-accuracy-mean-variance.js" simply by typing "nodejs [file_name]" in the shell
