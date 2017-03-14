@@ -1,0 +1,146 @@
+--Please follow this guide to install and configure all needed libs and use the Beacon scanning tool--
+
+1st thing to do is make sure all the files you downloaded from the drive are all in one folder/directory named Consultix_BLE
+
+****In case of headless configuration (no GUI):
+
+1- insert the SD card into your PC
+
+2- in the "boot" partition you'll find "cmdline.txt"
+
+3- edit it by adding " ip=169.254.1.1" at the end. That's to configure the Ethernet interface with an IP address whenever you boot the RPi.
+
+4- copy the Consultix_BLE directory to the RPi using
+
+	$sudo cp /media/*/Consultix_BLE /media/*/root/home/pi/
+
+5- unmount the SD card using right-click then unmount, or using the command
+
+	$sudo umount /media/*/root
+	$sudo umount /media/*/boot
+	$sudo umount /media/*/SETTINGS
+
+6- Eject the SD card from the SD card slot of the PC and then insert it in the RPi SD card slot.
+
+7- connect your PC to the RPi directly using an Ethernet cable.
+
+8- make sure the RPi is connected by using the command
+
+	$sudo ifconfig -a
+
+it will show you all your PC interfaces. For the RPi to be connected you should see your Ethernet interface with this line "inet addr:169.254.X.X  Bcast:169.254.255.255  Mask:255.255.0.0" where X can be any integer between 0 and 255
+,Or use
+
+	$sudo ip addr
+
+you should see something like "inet 169.254.X.X" in your Ethernet interface, where X can be an integer from 0 to 255.
+note : in some cases the Ethernet interface may not connect automatically, try this
+
+	$sudo lshw -class network  #to find the logical name for your Ethernet interface, let's say the standard eth0
+	$sudo ifconfig eth0 down
+	$sudo ifconfig eth0 up
+
+9- now to connect to your RPi you should use
+
+	$ssh -Y pi@169.254.1.1
+
+the -Y option is to be able to open text files in GUI on your PC -if needed-.
+it will ask for the password, which is "raspberry" for the default password. voila, you're in.
+
+10- it will ask you upon first use to fully configure your RPi, you just run the following command
+
+	$sudo raspi-config
+
+
+11- to connect to the internet, configure your WiFi network for the first time -or add a new WiFi network- use
+
+	$sudo Consultix_BLE
+	$sudo bash w_network_conf.sh mywifi mypass
+
+Assuming your network SSID is "mywifi" and key is "mypass"
+
+12- to make sure you're connected use
+
+	$sudo ifconfig -a
+
+you should see all interfaces including wlan0.
+You're connected if you find in the 2nd line "inet addr:192.168.X.X  Bcast:192.168.X.255  Mask:255.255.255.0" where X can be any number depending on your network.
+
+Or you can simply use
+
+	$sudo ping www.google.com
+
+and see if the pings succeed.(Ctrl+C to stop)
+
+note : if you need to be sure that the RPi can detect your network WiFi signal use
+
+	$sudo ifconfig wlan0 up
+	$sudo iwlist wlan0 scan
+
+13- after making sure you're connected to your network, set up the RPi and configure all the libraries needed for the scan tool through these simple commands
+
+	$cd Consultix_BLE
+	$bash conf.sh 1
+
+After reboot, reconnect
+
+	$cd Consultix_BLE
+	$bash conf.sh 2 5.41
+	
+After reboot, reconnect
+
+	$cd Consultix_BLE
+	$bash conf.sh 3
+
+After reboot, reconnect
+
+	$cd Consultix_BLE
+	$bash conf.sh 4
+
+Assuming that the latest bluez version is 5.41
+it will take some time so be patient
+note 1 : to know the latest version you should visit www.bluez.org
+note 2 : this might take a while depending on your internet speed, on a 512Kbps link it would take up to 3 hours
+note 3 : this shell script will end with a reboot
+
+14- After the RPi reboot, copy the Consultix-ble-est.js file into the bleacon/estimote directory using this command
+
+	$cd Consultix_BLE/
+	$cp Consultix-ble-est.js node_modules/bleacon/estimote/
+
+15- to start using the scanning tool script you use
+
+	$cd Consultix_BLE
+	$sudo bash Consultix_estimote_scan.sh
+
+this will show you the help manual for the options and input files to fully use the scanning tool script.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+****In case of GUI configuration :
+
+1- After the OS installation and getting to the desktop, you'll see the network connection icon on the upper right side. click and configure for your networks SSID and key.
+
+2- on the upper left side you'll find the terminal icon. open it.
+
+3- after making sure you're connected to your network, set up the RPi and configure all the libraries needed for the scan tool through these simple commands
+
+	$cd Consultix_BLE
+	$bash conf_seemlessly.sh 5.41
+
+Assuming that the latest bluez version is 5.41
+it will take some time so be patient
+note 1 : to know the latest version you should visit www.bluez.org
+note 2 : this might take a while depending on your internet speed, on a 512Kbps link it would take up to 3 hours
+note 3 : this shell script will end with a reboot
+
+4- After the RPi reboot, copy the Consultix-ble-est.js file into the bleacon/estimote directory using this command
+
+	$cp */Consultix-ble-est.js node_modules/bleacon/estimote/
+
+5- to start using the scanning tool script you use
+
+	$cd Consultix_BLE
+	$sudo bash Consultix_estimote_scan.sh
+
+this will show you the help manual for the options and input files to fully use the scanning tool script.
+

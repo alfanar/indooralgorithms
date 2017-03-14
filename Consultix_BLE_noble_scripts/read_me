@@ -1,0 +1,49 @@
+----------------------------------
+This directory contains data sets that was used in stand-still RSSI statistical precision testing (mean and variance of the RSSI and how long the Kalman Filter take to lock on the real value)
+----------------------------------
+beacons used :
+
+1) estimote
+2) MiniBeacon_04864
+3) MiniBeacon_04867
+----------------------------------
+Files descriptions :
+
+1) parse-RSSI.js
+
+	this JS script gathers the BLE packets from surrounding beacons and parse it to [MAC,NAME,RSSI] chunks
+
+2) calc_pos.js
+
+	this JS script calculates the position in XY coordinates out of RSSI readings of the 3 beacons mentioned above.
+	it uses Cramer's rule for a triangulation positioning method.
+
+3) tri.sh
+
+	this bash script collects 8 different RSSI readings using parse-RSSI.js then calculates the position in XY using calc_pos.js
+	it outputs the position in out.txt
+
+4) Test-accuracy.sh
+
+	this bash script creates a new test-accuracy.txt file (and deletes the old one), then fill it with 10,000 XY position readings.
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+5) calc-avg-rssi.js
+
+	this JS script calculates the RSSI mean in a sample of a beacon's readings
+
+6) calc_rssi_variance.js
+
+	this JS script calculates the RSSI variance over a sample of a beacon's readings
+
+7) Test-1m-avg.sh
+
+	this bash script uses parse-RSSI.js to collect a large sample of 10000 different beacon readings, 
+	then uses calc-avg-rssi.js to calculate the mean of this sample and get the mean of RSSI at 1m
+	the output will be in test-mean-results.txt
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+8) calc-kalman-accuracy.js
+
+	this JS script calculates the no of samples until the Kalman Filter reaches the real value with precision of two-digit fraction
+	output is presented in the terminal standard output stream

@@ -1,0 +1,6 @@
+scanning instance ---------------------'Thu 22 Sep 06:07:35 UTC 2016'------------------------
+bleacon found: {"uuid":"b9407f30f5f8466eaff925556b57fe6d","major":22349,"minor":3,"measuredPower":-62,"rssi":-35,"accuracy":0.19726541943620898,"proximity":"immediate"}
+bleacon found: {"uuid":"b9407f30f5f8466eaff925556b57fe6d","major":22349,"minor":3,"measuredPower":-62,"rssi":-38,"accuracy":0.23625370682719177,"proximity":"immediate"}
+bleacon found: {"uuid":"b9407f30f5f8466eaff925556b57fe6d","major":22349,"minor":3,"measuredPower":-62,"rssi":-39,"accuracy":0.25089260167557814,"proximity":"immediate"}
+bleacon found: {"uuid":"b9407f30f5f8466eaff925556b57fe6d","major":22349,"minor":3,"measuredPower":-62,"rssi":-36,"accuracy":0.20948849847751158,"proximity":"immediate"}
+bleacon found: {"uuid":"b9407f30f5f8466eaff925556b57fe6d","major":22349,"minor":3,"measuredPower":-62,"rssi":-39,"accuracy":0.25089260167557814,"proximity":"immediate"}
