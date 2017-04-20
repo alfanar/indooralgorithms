@@ -148,3 +148,5 @@ end=(5,5)
 a = AStar()
 a.init_grid(width, height, walls, start, end)
 a.process()
+
+
