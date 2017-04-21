@@ -27,8 +27,11 @@ except:
     exit()
 for line in file_hand:
 
-    measurement[2] = line.split()[0]
-    measurement[3] = line.split()[2]
+    print line.split()
+    measurement[2] = float((line.split()[0])[3:6])
+    measurement[3] = float((line.split()[2])[:3])
+
+    print measurement
     [filtered_state_mean, filtered_state_cov] = filters.ukf(current_state_mean, current_state_error_cov, measurement, Ts, process_noise, measurement_noise)
     [current_state_mean, current_state_error_cov] = [filtered_state_mean, filtered_state_cov]
 
